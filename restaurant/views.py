@@ -1,3 +1,17 @@
 from django.shortcuts import render
-
+from django.http import HttpResponse
+from django.shortcuts import redirect
+from restaurant.models import Post
+from datetime import datetime
 # Create your views here.
+def homepage (request):
+    posts = Post.objects.all()
+    now = datetime.now()
+    return render(request, 'index.html', locals())
+def showpost(request, name):
+    try:
+        post = Post.objects.get(name = name)
+        if post != None:
+            return render(request, 'post.html', locals())
+    except:
+        return redirect('/')

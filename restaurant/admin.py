@@ -1,5 +1,7 @@
 from django.contrib import admin
-
+from restaurant.models import Post
 # Register your models here.
-from .models import Restaurant
-admin.site.register(Restaurant)
+
+class PostAdmin(admin.ModelAdmin):
+    list_display = ('name', 'location', 'pub_date')
+admin.site.register(Post, PostAdmin)
